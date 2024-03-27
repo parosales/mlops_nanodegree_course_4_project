@@ -7,6 +7,7 @@ client = TestClient(app)
 def test_get_path():
     r = client.get("/")
     assert r.status_code == 200
+
 def test_post_over_50k():
     my_test_subject_3 = json.dumps({
         "age": 48,
