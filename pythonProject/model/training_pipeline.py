@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, label_binarize, LabelBinarizer
 from sklearn import svm
 from joblib import dump
+import pickle
+
 
 # ------------------------------- Define vars and constants ------------------------------- #
 categorical_features = [ 'workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race', 'native-country', 'sex' ]
@@ -19,8 +21,11 @@ model_path = './model/'
 model_file = 'model.joblib'
 test_set_path = './test/'
 test_file = 'tests.py'
+one_hot_encoder_file = 'one_hot_encoder_file.pickle' # one-hot encoder for trained data
+
 # -------------------------------Functions ------------------------------- #
 def evaluate_on_categorical_slices(clean_data_df, model_obj, encoder, lb):
+#def evaluate_on_categorical_slices(clean_data_df, model_obj, lb):
     for col in categorical_features:
         for tested_value in clean_data_df[col].unique():
             print (col, tested_value)
@@ -43,12 +48,16 @@ def evaluate_on_categorical_slices(clean_data_df, model_obj, encoder, lb):
 clean_data_df = pd.read_csv( './data/clean_census.csv' )
 
 # -------------------------------------- Pre-processing ------------------------------------- #
-X, y, encoder, lb = data.process_data(
+X, y, encoder_for_trained_data, lb = data.process_data(
     clean_data_df ,
     categorical_features,
     label,
     True
 )
+
+# save the OHE for other uses: e.g. prediction/inference
+with open(model_path + one_hot_encoder_file, 'wb') as f:
+    pickle.dump(encoder_for_trained_data, f)
 
 # ====================================== Model Training ====================================== #
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=23)
@@ -66,7 +75,8 @@ print ( f"precision, recall, fbeta: {precision}, {recall}, {fbeta}" )
 
 
 # ====================================== Evaluate on Slices of data ====================================== #
-evaluate_on_categorical_slices(clean_data_df, model_obj, encoder, lb)
+#evaluate_on_categorical_slices(clean_data_df, model_obj, encoder_for_trained_data, lb)
+#evaluate_on_categorical_slices(clean_data_df, model_obj, lb)
 
 # ====================================== Predict ====================================== #
 preds = model.inference(model_obj, X_test)
