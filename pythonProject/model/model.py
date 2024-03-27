@@ -22,7 +22,7 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
 
-    p_max_iterations = 300
+    p_max_iterations = 1000
 
     lr_model = LogisticRegression(max_iter=p_max_iterations)
 
