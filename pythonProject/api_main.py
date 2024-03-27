@@ -58,25 +58,25 @@ async def predict_salary_over50(test_subject: SubjectAttributes):
     print (subject_df)
 
     my_encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
-    X_categorical = subject_df[cat_features].values
-    print ("BEFORE encoding", X_categorical)
+    #X_categorical = subject_df[cat_features].values
+    #print ("BEFORE encoding", X_categorical)
     #X_categorical = my_encoder.fit_transform(X_categorical)
-    X_categorical = my_encoder.transform(X_categorical)
-    print("AFTER encoding", X_categorical)
+    #X_categorical = my_encoder.transform(X_categorical)
+    #print("AFTER encoding", X_categorical)
 
 
     #print("X_continuous: ", X_continuous)
 
-    # test_subject, y, encoder, lb = model.data.process_data (
-    #     X = subject_df,
-    #     categorical_features = cat_features,
-    #     label = None,
-    #     training = False,
-    #     encoder = my_encoder,
-    #     lb = None
-    # )
-    #
-    # print("INFERENCE: ")
-    # print ( model.model.inference(model_obj, test_subject ) )
+    test_subject, y, encoder, lb = model.data.process_data (
+        X = subject_df,
+        categorical_features = cat_features,
+        label = None,
+        training = False,
+        encoder = my_encoder,
+        lb = None
+    )
+
+    print("INFERENCE: ")
+    print ( model.model.inference(model_obj, test_subject ) )
 
     return 1
