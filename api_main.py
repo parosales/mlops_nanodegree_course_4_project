@@ -11,6 +11,7 @@ model_path = './model/'
 model_file = 'model.joblib'
 one_hot_encoder_file = 'one_hot_encoder_file.pickle'
 
+
 class SubjectAttributes(BaseModel):
     age: int = Field(examples=[48])
     workclass: str = Field(examples=["Self-emp-not-inc"])
@@ -26,6 +27,7 @@ class SubjectAttributes(BaseModel):
     capital_loss: float = Field(examples=[1902])
     hours_per_week: int = Field(examples=[60])
     native_country: str = Field(examples=["United-States"])
+
 
 # model and encoder saved in the training phase
 model_obj = load(model_path + model_file)

@@ -30,7 +30,7 @@ one_hot_encoder_file = 'one_hot_encoder_file.pickle'
 
 # ---------------Functions --------------- #
 def evaluate_on_categorical_slices(clean_data_df, model_obj, encoder, lb):
-    with open(slices_output_file , 'w') as output_file:
+    with open(slices_output_file, 'w') as output_file:
 
         # def evaluate_on_categorical_slices(clean_data_df, model_obj, lb):
         for col in categorical_features:
