@@ -16,10 +16,14 @@ Training/hyperparameter details:
 
 Predict the income range of a person (above or below 50K US$) based on demographic traits.
 
-## Data
+## Souce Data
 
 - The source data is from https://archive.ics.uci.edu/dataset/20/census+income
 - The data was cleansed by removing heading and trailing spaces, as well as removing rows with empty fields.
+
+## Evaluation Data
+
+- 25% percent of the source dataset was used for evaluation.
 
 ## Metrics
 _Please include the metrics used and your model's performance on those metrics._

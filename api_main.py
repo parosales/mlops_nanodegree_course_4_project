@@ -13,20 +13,20 @@ one_hot_encoder_file = 'one_hot_encoder_file.pickle'
 
 
 class SubjectAttributes(BaseModel):
-    age: int = Field(examples=[48])
-    workclass: str = Field(examples=["Self-emp-not-inc"])
-    fnlgt: int = Field(examples=[191277])
-    education: str = Field(examples=["Doctorate"])
-    education_num: int = Field(examples=[16])
-    marital_status: str = Field(examples=["Married-civ-spouse"])
-    occupation: str = Field(examples=["Prof-specialty"])
-    relationship: str = Field(examples=["Husband"])
-    race: str = Field(examples=["White"])
-    sex: str = Field(examples=["Male"])
-    capital_gain: float = Field(examples=[0])
-    capital_loss: float = Field(examples=[1902])
-    hours_per_week: int = Field(examples=[60])
-    native_country: str = Field(examples=["United-States"])
+    age: int = Field(example=[48])
+    workclass: str = Field(example=["Self-emp-not-inc"])
+    fnlgt: int = Field(example=[191277])
+    education: str = Field(example=["Doctorate"])
+    education_num: int = Field(example=[16])
+    marital_status: str = Field(example=["Married-civ-spouse"])
+    occupation: str = Field(example=["Prof-specialty"])
+    relationship: str = Field(example=["Husband"])
+    race: str = Field(example=["White"])
+    sex: str = Field(example=["Male"])
+    capital_gain: float = Field(example=[0])
+    capital_loss: float = Field(example=[1902])
+    hours_per_week: int = Field(example=[60])
+    native_country: str = Field(example=["United-States"])
 
 
 # model and encoder saved in the training phase
