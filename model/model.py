@@ -1,8 +1,5 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import OneHotEncoder, label_binarize, LabelBinarizer
-from sklearn.metrics import f1_score
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
 # Optional: implement hyperparameter tuning.
@@ -13,7 +10,7 @@ def train_model(X_train, y_train):
     Inputs
     ------
     X_train : np.array
-        Training data.
+        Training src_data.
     y_train : np.array
         Labels.
     Returns
@@ -31,7 +28,8 @@ def train_model(X_train, y_train):
 
 def compute_model_metrics(y, preds):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model using precision,
+    recall, and F1.
 
     Inputs
     ------

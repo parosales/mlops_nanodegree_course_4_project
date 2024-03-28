@@ -4,9 +4,11 @@ from api_main import app
 
 client = TestClient(app)
 
+
 def test_get_path():
     r = client.get("/")
     assert r.status_code == 200
+
 
 def test_post_over_50k():
     my_test_subject_3 = json.dumps({
@@ -27,11 +29,12 @@ def test_post_over_50k():
     })
 
     api_response = client.post("/predictions", data=my_test_subject_3)
-    #print(api_response.status_code)
-    #print(api_response.text)
+    # print(api_response.status_code)
+    # print(api_response.text)
 
     assert api_response.status_code == 200
-    assert int( api_response.text) == 1
+    assert int(api_response.text) == 1
+
 
 def test_post_below_50k():
     my_test_subject_1 = json.dumps({
@@ -53,11 +56,12 @@ def test_post_below_50k():
 
     api_response = client.post("/predictions", data=my_test_subject_1)
 
-    #print(api_response.status_code)
-    #print(api_response.text)
+    # print(api_response.status_code)
+    # print(api_response.text)
 
     assert api_response.status_code == 200
     assert int(api_response.text) == 0
+
 
 if __name__ == "__main__":
     test_get_path()
