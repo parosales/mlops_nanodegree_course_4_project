@@ -35,3 +35,6 @@ Overall Performance Metrics:
 To protect people's identity, the records have been anonymized.
 
 ## Caveats and Recommendations
+
+The model metrics show that the model is not that accurate. Further refinements should be to improve results.
+

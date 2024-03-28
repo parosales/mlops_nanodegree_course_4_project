@@ -21,6 +21,8 @@ model_path = './model/'
 model_file = 'model.joblib'
 test_set_path = './test/'
 test_file = 'tests.py'
+slices_output_file = 'slice_output.txt'
+
 
 # one-hot encoder for trained src_data
 one_hot_encoder_file = 'one_hot_encoder_file.pickle'
@@ -28,23 +30,26 @@ one_hot_encoder_file = 'one_hot_encoder_file.pickle'
 
 # ---------------Functions --------------- #
 def evaluate_on_categorical_slices(clean_data_df, model_obj, encoder, lb):
-    # def evaluate_on_categorical_slices(clean_data_df, model_obj, lb):
-    for col in categorical_features:
-        for tested_value in clean_data_df[col].unique():
-            print(col, tested_value)
+    with open(slices_output_file , 'w') as output_file:
 
-            X, y, encoder, lb = data.process_data(
-                clean_data_df[clean_data_df[col] == tested_value],
-                categorical_features,
-                label,
-                False,
-                encoder,
-                lb
-            )
+        # def evaluate_on_categorical_slices(clean_data_df, model_obj, lb):
+        for col in categorical_features:
+            for tested_value in clean_data_df[col].unique():
 
-            preds = model.inference(model_obj, X)
-            precision, recall, fbeta = model.compute_model_metrics(y, preds)
-            print(f"precision, recall, fbeta: {precision}, {recall}, {fbeta}")
+                X, y, encoder, lb = data.process_data(
+                    clean_data_df[clean_data_df[col] == tested_value],
+                    categorical_features,
+                    label,
+                    False,
+                    encoder,
+                    lb
+                )
+
+                preds = model.inference(model_obj, X)
+                precision, recall, fbeta = model.compute_model_metrics(y, preds)
+
+                output_file.write(col + "," + tested_value + ":")
+                output_file.write(f"  precision, recall, fbeta: {precision}, {recall}, {fbeta} \n")
 
 
 # ============= Ingestion and pre-processing =============== #
@@ -81,9 +86,9 @@ precision, recall, fbeta = model.compute_model_metrics(y_test, preds)
 print(f"precision, recall, fbeta: {precision}, {recall}, {fbeta}")
 
 # ==================== Evaluate on Slices of src_data ================== #
-# evaluate_on_categorical_slices(
-#   clean_data_df, model_obj, encoder_for_trained_data, lb
-#   )
+evaluate_on_categorical_slices(
+   clean_data_df, model_obj, encoder_for_trained_data, lb
+)
 
 # =================== Predict ==================== #
 preds = model.inference(model_obj, X_test)
