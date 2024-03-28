@@ -7,7 +7,11 @@ client = TestClient(app)
 
 def test_get_path():
     r = client.get("/")
+    print("response.text")
+    print(r.text)
+
     assert r.status_code == 200
+    assert r.text == '"This is the API to the Prediction Model, welcome!"'
 
 
 def test_post_over_50k():

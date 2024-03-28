@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import model.model
 from joblib import load
 import pandas as pd
@@ -11,23 +11,21 @@ model_path = './model/'
 model_file = 'model.joblib'
 one_hot_encoder_file = 'one_hot_encoder_file.pickle'
 
-
 class SubjectAttributes(BaseModel):
-    age: int
-    workclass: str
-    fnlgt: int
-    education: str
-    education_num: int
-    marital_status: str
-    occupation: str
-    relationship: str
-    race: str
-    sex: str
-    capital_gain: float
-    capital_loss: float
-    hours_per_week: int
-    native_country: str
-
+    age: int = Field(examples=[48])
+    workclass: str = Field(examples=["Self-emp-not-inc"])
+    fnlgt: int = Field(examples=[191277])
+    education: str = Field(examples=["Doctorate"])
+    education_num: int = Field(examples=[16])
+    marital_status: str = Field(examples=["Married-civ-spouse"])
+    occupation: str = Field(examples=["Prof-specialty"])
+    relationship: str = Field(examples=["Husband"])
+    race: str = Field(examples=["White"])
+    sex: str = Field(examples=["Male"])
+    capital_gain: float = Field(examples=[0])
+    capital_loss: float = Field(examples=[1902])
+    hours_per_week: int = Field(examples=[60])
+    native_country: str = Field(examples=["United-States"])
 
 # model and encoder saved in the training phase
 model_obj = load(model_path + model_file)
@@ -40,7 +38,7 @@ app = FastAPI()
 
 @app.get("/")
 async def welcome_to_api():
-    return {"This is the API to the Prediction Model, welcome!"}
+    return "This is the API to the Prediction Model, welcome!"
 
 
 @app.post("/predictions")
